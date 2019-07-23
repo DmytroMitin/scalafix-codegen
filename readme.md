@@ -22,11 +22,11 @@ sbt:
 out/compile
 ```
 
-- triggers a source generator that runs `in/scalafix ProcedureSyntax
+- triggers a source generator that runs `in/scalafix Scalafixdemo --rules=file:rules/src/main/scala/Scalafixdemo.scala
   --out-from=in/src/main --out-to=out/target/scala-2.12/src_managed/main`
 - generates a new file
-  `out/target/scala-2.12/src_managed/main/scala/foo/Main.scala` which is a copy
-  of the same file from the `in` project with the `ProcedureSyntax` rule
+  `out/target/scala-2.12/src_managed/main/scala/foo/A.scala` which is a copy
+  of the same file from the `in` project with the `Scalafixdemo` rule
 applied.
 
 To customize the transformation, implement a Scalafix rule following
