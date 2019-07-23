@@ -1,5 +1,20 @@
 # scalafix-codegen
 
+```sbtshell
+[IJ]sbt:scalafix-codegen> out/compile
+[info] Compiling 1 Scala source to /media/data/Projects/scalafix-codegen1/scalafix-codegen/in/target/scala-2.12/classes ...
+[info] Done compiling.
+[info] Compiling 1 Scala source to /media/data/Projects/scalafix-codegen1/scalafix-codegen/out/target/scala-2.12/classes ...
+[info] Done compiling.
+[success] Total time: 11 s, completed 23.07.2019 3:38:13
+[IJ]sbt:scalafix-codegen> out/run
+[info] Packaging /media/data/Projects/scalafix-codegen1/scalafix-codegen/out/target/scala-2.12/out_2.12-0.1.0-SNAPSHOT.jar ...
+[info] Done packaging.
+[info] Running A 
+hi
+[success] Total time: 2 s, completed 23.07.2019 3:40:45
+```
+
 Example how to use scalafix for code generation.  Run the following command in
 sbt:
 
