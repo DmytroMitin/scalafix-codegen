@@ -1,12 +1,19 @@
+lazy val V = _root_.scalafix.sbt.BuildInfo
+
 inThisBuild(
   List(
-    scalaVersion := "2.12.8",
+    scalaVersion := V.scala212,
     addCompilerPlugin(scalafixSemanticdb),
     scalacOptions ++= List(
       "-Yrangepos"
     )
   )
 )
+
+lazy val rules = project
+  .settings(
+    libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion
+  )
 
 lazy val in = project
 
@@ -21,7 +28,7 @@ lazy val out = project
       Def.task {
         scalafix
           .in(in, Compile)
-          .toTask(s" ProcedureSyntax --out-from=$outFrom --out-to=$outTo")
+          .toTask(s" Scalafixdemo --rules=file:rules/src/main/scala/Scalafixdemo.scala --out-from=$outFrom --out-to=$outTo")
           .value
         (to ** "*.scala").get
       }
