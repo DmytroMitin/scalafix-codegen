@@ -1,3 +1,11 @@
+lazy val auxifyV = "0.4"
+lazy val auxifyMeta = "com.github.dmytromitin" %% "auxify-meta" % auxifyV
+lazy val auxifyMetaCore = "com.github.dmytromitin" %% "auxify-meta-core" % auxifyV
+
+import com.geirsson.coursiersmall.{Repository => R}
+scalafixResolvers in ThisBuild += new R.Maven("https://oss.sonatype.org/content/groups/public/")
+scalafixDependencies in ThisBuild += auxifyMeta
+
 lazy val V = _root_.scalafix.sbt.BuildInfo
 
 inThisBuild(
@@ -16,6 +24,9 @@ lazy val rules = project
   )
 
 lazy val in = project
+  .settings(
+    libraryDependencies += auxifyMetaCore
+  )
 
 lazy val out = project
   .settings(
@@ -28,9 +39,11 @@ lazy val out = project
       Def.task {
         scalafix
           .in(in, Compile)
-          .toTask(s" Scalafixdemo --rules=file:rules/src/main/scala/Scalafixdemo.scala --out-from=$outFrom --out-to=$outTo")
+          .toTask(s" AuxRule --out-from=$outFrom --out-to=$outTo")
+//          .toTask(s" --rules=file:rules/src/main/scala/Scalafixdemo.scala --out-from=$outFrom --out-to=$outTo")
           .value
         (to ** "*.scala").get
       }
-    }.taskValue
+    }.taskValue,
+    libraryDependencies += auxifyMetaCore
   )
